@@ -1430,7 +1430,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -3484,9 +3484,9 @@ var getfloordata = function getfloordata() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _wx = _interopRequireDefault(__webpack_require__(/*! flyio/dist/npm/wx */ 23));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _wx = _interopRequireDefault(__webpack_require__(/*! flyio/dist/npm/wx */ 23));
 
-var _toast = _interopRequireDefault(__webpack_require__(/*! @/utils/toast.js */ 52));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var fly = new _wx.default();
+var _toast = _interopRequireDefault(__webpack_require__(/*! @/utils/toast.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var fly = new _wx.default();
 fly.config.baseURL = 'https://api-hmugo-web.itheima.net/api/public/v1';
 
 //添加请求拦截器
@@ -3494,6 +3494,7 @@ fly.interceptors.request.use(function (request) {
   //给所有请求添加自定义header
   request.headers["X-Tag"] = "flyio";
   //打印出请求体
+  _toast.default.loading();
   // console.log(request.body)
   //终止请求
   //var err=new Error("xxx")
@@ -3507,6 +3508,7 @@ fly.interceptors.request.use(function (request) {
 //添加响应拦截器，响应拦截器会在then/catch处理之前执行
 fly.interceptors.response.use(
 function (response) {
+  uni.hideToast();
   //只将请求结果的data字段返回
   return response.data;
 },
@@ -3519,6 +3521,7 @@ function (err) {
 
 
 fly;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -4327,6 +4330,46 @@ module.exports = function (engine) {
 /***/ })
 /******/ ]);
 });
+
+/***/ }),
+
+/***/ 24:
+/*!*******************************************************!*\
+  !*** C:/Users/Gzl7777777/Desktop/hmyh/utils/toast.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function toast(title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
+  uni.showToast({
+    title: title,
+    icon: 'none',
+    duration: duration });
+
+}
+toast.err = function (title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
+  uni.showToast({
+    title: title,
+    icon: 'error',
+    duration: duration });
+
+};
+toast.success = function (title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
+  uni.showToast({
+    title: title,
+    icon: 'success',
+    duration: duration });
+
+};
+toast.loading = function (title, duration) {
+  uni.showToast({
+    title: '正在加载中...',
+    icon: 'loading' });
+
+};var _default =
+toast;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -10320,7 +10363,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -10341,14 +10384,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -10434,7 +10477,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"hmyh","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10855,37 +10898,32 @@ internalMixin(Vue);
 
 /***/ }),
 
-/***/ 52:
-/*!*******************************************************!*\
-  !*** C:/Users/Gzl7777777/Desktop/hmyh/utils/toast.js ***!
-  \*******************************************************/
+/***/ 57:
+/*!********************************************************!*\
+  !*** C:/Users/Gzl7777777/Desktop/hmyh/api/goodlist.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function toast(title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
-  uni.showToast({
-    title: title,
-    icon: 'none',
-    duration: duration });
-
+Object.defineProperty(exports, "__esModule", { value: true });exports.getgoodslist = getgoodslist;var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+function getgoodslist(data) {
+  return _request.default.get('/goods/search', data);
 }
-toast.err = function (title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
-  uni.showToast({
-    title: title,
-    icon: 'error',
-    duration: duration });
 
-};
-toast.success = function (title) {var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
-  uni.showToast({
-    title: title,
-    icon: 'success',
-    duration: duration });
+/***/ }),
 
-};var _default =
-toast;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+/***/ 60:
+/*!*********************************************************!*\
+  !*** C:/Users/Gzl7777777/Desktop/hmyh/filters/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.toFixed = toFixed;function toFixed(num) {
+  return Number(num).toFixed(2);
+}
 
 /***/ })
 

@@ -8,6 +8,7 @@ fly.interceptors.request.use((request) => {
 	//给所有请求添加自定义header
 	request.headers["X-Tag"] = "flyio";
 	//打印出请求体
+	toast.loading()
 	// console.log(request.body)
 	//终止请求
 	//var err=new Error("xxx")
@@ -21,6 +22,7 @@ fly.interceptors.request.use((request) => {
 //添加响应拦截器，响应拦截器会在then/catch处理之前执行
 fly.interceptors.response.use(
 	(response) => {
+		uni.hideToast()
 		//只将请求结果的data字段返回
 		return response.data
 	},

@@ -6,8 +6,8 @@
     },
     "setting": {
         "urlCheck": false,
-        "coverView": true,
         "es6": true,
+        "coverView": true,
         "postcss": true,
         "lazyloadPlaceholderEnable": false,
         "preloadBackgroundData": false,
